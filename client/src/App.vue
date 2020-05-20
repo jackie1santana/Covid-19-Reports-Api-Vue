@@ -1,7 +1,11 @@
 <template>
   <div id="app">
     <div id="nav">
-      <Header></Header>
+      <Header>
+         <Registration slot="signup"></Registration>
+         <Login slot="login"></Login>
+      </Header>
+      
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
@@ -11,9 +15,13 @@
 
 <script>
 import Header from './components/Header'
+import Registration from './components/Registration'
+import Login from './components/Login'
 export default {
   components:{
-    Header
+    Header,
+    Registration,
+    Login
   }
 }
 </script>
@@ -37,5 +45,7 @@ export default {
       color: #42b983;
     }
   }
+
+  
 }
 </style>

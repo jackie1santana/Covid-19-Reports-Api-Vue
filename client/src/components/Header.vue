@@ -1,4 +1,6 @@
 <template>
+<div>
+ 
   <v-card class="overflow-hidden">
     <v-app-bar
       absolute
@@ -19,7 +21,9 @@
 
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Title</v-toolbar-title>
+      <v-toolbar-title>
+        
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
@@ -27,14 +31,14 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
+    
+<slot name="signup"></slot>
+<slot name="login"></slot>
       <v-menu
         bottom
         left
       >
+      
         <template v-slot:activator="{ on }">
           <v-btn
             icon
@@ -57,9 +61,9 @@
 
       <template v-slot:extension>
         <v-tabs align-with-title>
-          <v-tab>Tab 1</v-tab>
-          <v-tab>Tab 2</v-tab>
-          <v-tab>Tab 3</v-tab>
+          <v-tab>Home</v-tab>
+          <v-tab>About</v-tab>
+          <v-tab>Donate</v-tab>
         </v-tabs>
       </template>
     </v-app-bar>
@@ -71,10 +75,17 @@
       <v-container style="height:200px;"></v-container>
     </v-sheet>
   </v-card>
+
+  </div>
+  
 </template>
 
 <script>
+
   export default {
+    components:{
+    
+    },
     data: () => ({
       items: [
         { title: 'Click Me' },

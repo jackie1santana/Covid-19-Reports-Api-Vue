@@ -5,13 +5,16 @@
 </template>
 
 <script>
-
-import DataChart from '../components/DataChart'
-
+import DataChart from "../components/DataChart";
 export default {
-  name: 'Home',
+  name: "Home",
   components: {
     DataChart
-  }
-}
+  },
+};
 </script>
+
+<style lang="scss">
+
+</style>
+
