@@ -17,3 +17,13 @@ if they have already been registered then we will run a res.status(400)
 * create a hash (combines users password 7 salt to create a hashed password)
 
 1. If everything passes & an email is not already registered then create a user.
+
+Date Api format
+ //put dat as parameter
+  const MM = "04"
+  const DD = "02"
+  const YYYY = "2020"
+
+  let date = `${MM}-${DD}-${YYYY}`
+
+  globalCasesByDate(date)

@@ -1,34 +1,25 @@
 const { gql } = require("apollo-server");
-const axios = require("axios");
+const { 
+  currentGlobalCases, 
+  globalCasesByDate,
+  casesByState
+ } = require('../covidData/data')
 
 class Covid {}
 //Global cases
-const global = axios({
-  method: "GET",
-  url: "https://covid-19-data.p.rapidapi.com/totals",
-  headers: {
-    "content-type": "application/octet-stream",
-    "x-rapidapi-host": "covid-19-data.p.rapidapi.com",
-    "x-rapidapi-key": "a8b09fdfc0mshd6f279d5c7cefd6p11f240jsn27ee495e8d1c",
-    useQueryString: true,
-  },
-  params: {
-    format: "json",
-  },
-})
-  .then((response) => {
-    console.log(response.data);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
+
+  // currentGlobalCases()
+  // globalCasesByDate("04-02-2020")
+  let state = 'south carolina' //can be any state
+  state = state.toUpperCase() && state.toLowerCase()
+  casesByState(state)
 
 const books = [
   {
     title: "Harry Potter and the Chamber of Secrets",
     author: "J.K. Rowling",
   },
-  {
+ {
     title: "Jurassic Park",
     author: "Michael Crichton",
   },
