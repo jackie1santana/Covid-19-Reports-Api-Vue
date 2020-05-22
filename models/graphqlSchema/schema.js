@@ -1,45 +1,84 @@
 const { gql } = require("apollo-server");
-const { 
-  currentGlobalCases, 
-  globalCasesByDate,
-  casesByState
- } = require('../covidData/data')
+const { currentGlobalCases } = require("../covidData/currentGlobalCases");
+const { casesByCountryName } = require("../covidData/casesByCountryName");
+const { casesByState } = require("../covidData/casesByState");
+const { globalCasesByDate } = require("../covidData/globalCasesByDate");
 
-class Covid {}
 //Global cases
-
-  // currentGlobalCases()
-  // globalCasesByDate("04-02-2020")
-  let state = 'south carolina' //can be any state
-  state = state.toUpperCase() && state.toLowerCase()
-  casesByState(state)
-
-const books = [
+const errors = [
   {
-    title: "Harry Potter and the Chamber of Secrets",
-    author: "J.K. Rowling",
-  },
- {
-    title: "Jurassic Park",
-    author: "Michael Crichton",
+    casesByState: "invalid country",
   },
 ];
 
 const typeDefs = gql`
-  type Book {
-    title: String
-    author: String
+  type GlobalCases {
+    confirmed: Int
+    recovered: Int
+    critical: Int
+    deaths: Int
+    lastUpdate: String
+  }
+
+  type GlobalCasesByDate {
+    confirmed: Int
+    recovered: Int
+    deaths: Int
+    active: Int
+    date: String
+  }
+
+  type CasesByCountryName {
+    countrycode: String
+    country: String
+    latitude: String
+    longitude: String
+    confirmed: Int
+    deaths: Int
+    recovered: Int
+  }
+
+  type CasesByState {
+    countrycode: String
+    country: String
+    state: String
+    latitude: String
+    longitude: String
+    confirmed: Int
+    deaths: Int
   }
 
   type Query {
-    getBooks: [Book]
+    getCurrentGlobalCases: [GlobalCases]
+    getGlobalCasesByDate(id: String!): [GlobalCasesByDate]
+    getCasesByCountryName(id: String!): CasesByCountryName
+    getCasesByState(id: String!): CasesByState
   }
 `;
 
 const resolvers = {
   Query: {
-    getBooks: () => books,
+    getCurrentGlobalCases: () => currentGlobalCases(),
+
+    getGlobalCasesByDate(parent, args) {
+      //id: Cases By Date
+
+      return globalCasesByDate(args.id);
+    },
+    // id: Cases By Country Name
+    getCasesByCountryName(parent, args) {
+      return casesByCountryName(args.id.trim());
+    },
+
+    getCasesByState(parent, args) {
+      args.id = args.id.toUpperCase().trim() && args.id.toLowerCase().trim();
+
+      if (!args.id) {
+        return "invalid state";
+      }
+
+      return casesByState(args.id);
+    },
   },
 };
-
 module.exports = { typeDefs, resolvers };
