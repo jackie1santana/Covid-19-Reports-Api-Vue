@@ -1,29 +1,39 @@
 <template>
-  <div>
-    <h1>Covid 19 Data</h1>
-    <h3>Current Cases as of 5/20/20</h3>
-    <h4>
-      [current cases here..coming soon [Active, Critical, Recovered, Deaths]]
-    </h4>
+  <ApolloQuery :query="require('../graphql/getTestGlobalCases.gql')">
+    <template v-slot="{ result: { loading, error, data } }">
+      <div>
+        <h1>Covid 19 Data</h1>
+        <h3>Current Cases as of 5/20/20</h3>
+        <h4>
+          [current cases here..coming soon [Active, Critical, Recovered,
+          Deaths]]
+        </h4>
 
-    <div v-for="cases in getCurrentGlobalCases" :key="cases.confirmed">
-      Confirmed: {{ cases.confirmed }}
+        <div v-if="data">
+          <h1
+            v-for="cases in data.getTestGlobalCases"
+            :key="cases.confirmed"
+          >
+            Confirmed:{{cases.confirmed}}
+          </h1>
 
-      <!-- <div v-if="this.$apollo.queries">
-        {{ variables.apolloSeries }}
-      </div> -->
+          
+        </div>
 
-      <div id="chart">
-        <apexchart
-          type="area"
-          height="550"
-          width="1000"
-          :options="chartOptions"
-          :series="series"
-        ></apexchart>
+        <h2>{{ test() }}</h2>
+
+        <div id="chart">
+          <apexchart
+            type="area"
+            height="550"
+            width="1000"
+            :options="chartOptions"
+            :series="test()"
+          ></apexchart>
+        </div>
       </div>
-    </div>
-  </div>
+    </template>
+  </ApolloQuery>
 </template>
 
 <script>
@@ -31,50 +41,53 @@ import VueApexCharts from "vue-apexcharts";
 import gql from "graphql-tag";
 
 export default {
-  apollo: {
-    getCurrentGlobalCases: {
-      query: gql`
-        query {
-          getCurrentGlobalCases {
-            confirmed
-            recovered
-            critical
-            deaths
-            lastUpdate
-          }
-        }
-      `,
-      variables() {
-       
-          const series1 = Array.from(
-            this.$apollo.queries.getCurrentGlobalCases.vm.series[0].data);
-          series1.pop();
-          console.log(series1)
-
-          return series1;
-        
-
-      
-          // console.log(this.$apollo.queries.observer.variables)
-        
-      },
-    },
-  },
   components: {
     apexchart: VueApexCharts,
   },
-  computed: {
-    // apolloQueryData () {
-    // }
-  },
-  methods: {},
+   apollo: {
+    getTestGlobalCases: {
+      query: gql`
+        query {
+          getTestGlobalCases {
+      confirmed
+      recovered
+      critical
+      deaths
+      testApi
+    }
+        }
+      `,
+    },
+    // variables(){
+    //   console.log(this.$apollo.queries)
+    // },
+    //  // Disable the query
+    // skip () {
+    //   return this.skipQuery
+    // },
+   },
   data: function() {
     return {
-      message: 200,
+   
+      message: "Jackie Santana",
       series: [
         {
           name: "Confirmed Cases",
-          data: [10, 41, 200, 50, 55, 40, 62, 69, 91, 148, 150, 160, 170],
+          data: [
+            2,
+            41,
+            35,
+            51,
+            55,
+            400,
+            62,
+            69,
+            91,
+            148,
+            150,
+            160,
+            170,
+          ],
         },
         {
           name: "Deaths",
@@ -127,6 +140,17 @@ export default {
         colors: ["#00aae4", "#ff0000"],
       },
     };
+  },
+  methods: {
+    test(){
+      const newSeries = Array.from(this.series)
+      newSeries[0].data.splice(2,1,1000)
+      
+      // console.log(this.$apollo.queries.getTestGlobalCases.skip = true)
+    
+    //  console.log(this.$apollo.skipAllQueries)
+      return newSeries
+    }
   },
 };
 </script>

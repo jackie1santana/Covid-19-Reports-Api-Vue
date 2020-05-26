@@ -1,0 +1,9 @@
+query {
+    getTestGlobalCases {
+      confirmed
+      recovered
+      critical
+      deaths
+      testApi
+    }
+  }

@@ -20,5 +20,18 @@ const currentGlobalCases = () =>
     .catch((error) => {
       console.log(error);
     });
+
+
+
+    const testGlobalCases = [
+      {
+          confirmed: 53003060,
+          recovered: 240050,
+          critical: 3000,
+          deaths: 30045895,
+          lastUpdate: "2020-05-26T18:15:02+02:00",
+          testApi: true
+      }
+  ]
   
-module.exports = { currentGlobalCases };
+module.exports = { currentGlobalCases, testGlobalCases };

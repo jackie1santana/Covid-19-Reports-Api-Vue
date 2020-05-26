@@ -27,3 +27,9 @@ Date Api format
   let date = `${MM}-${DD}-${YYYY}`
 
   globalCasesByDate(date)
+
+
+
+ # Fix right before deployment
+  * turn the database back on
+  * fix NODE_ENV 

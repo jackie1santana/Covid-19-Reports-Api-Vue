@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const casesByState = state =>
+const casesByState = (state) =>
   axios({
     method: "GET",
     url: "https://covid19-data.p.rapidapi.com/us",
@@ -110,6 +110,10 @@ const casesByState = state =>
         case "indiana":
         case "in":
           return Indiana;
+          break;
+        case "illinois":
+        case "il":
+          return Illinois;
           break;
         case "mississippi":
         case "ms":
