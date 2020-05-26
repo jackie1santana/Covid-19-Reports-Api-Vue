@@ -1,0 +1,11 @@
+query {
+  getCasesByCountryName(id: "india") {
+    countrycode
+    country
+    latitude
+    longitude
+    confirmed
+    deaths
+    recovered
+  }
+}

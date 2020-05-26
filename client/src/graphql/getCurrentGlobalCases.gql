@@ -1,0 +1,9 @@
+query {
+  getCurrentGlobalCases {
+    confirmed
+    recovered
+    critical
+    deaths
+    lastUpdate
+  }
+}

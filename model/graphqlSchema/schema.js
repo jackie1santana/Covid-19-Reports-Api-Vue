@@ -3,6 +3,7 @@ const { currentGlobalCases } = require("../covidData/currentGlobalCases");
 const { casesByCountryName } = require("../covidData/casesByCountryName");
 const { casesByState } = require("../covidData/casesByState");
 const { globalCasesByDate } = require("../covidData/globalCasesByDate");
+const { db } = require("../database/firebase");
 
 //Global cases
 const errors = [
@@ -12,6 +13,7 @@ const errors = [
 ];
 
 const typeDefs = gql`
+
   type GlobalCases {
     confirmed: Int
     recovered: Int
@@ -48,13 +50,27 @@ const typeDefs = gql`
     deaths: Int
   }
 
+  type Registered{
+    email: String,
+    password: String
+
+  }
+
   type Query {
     getCurrentGlobalCases: [GlobalCases]
     getGlobalCasesByDate(id: String!): [GlobalCasesByDate]
     getCasesByCountryName(id: String!): CasesByCountryName
     getCasesByState(id: String!): CasesByState
   }
+
+  type Mutation {
+    addRegisteredUser(email: String, password: String): Registered
+  }
 `;
+
+
+
+const dates = [];
 
 const resolvers = {
   Query: {
@@ -63,22 +79,61 @@ const resolvers = {
     getGlobalCasesByDate(parent, args) {
       //id: Cases By Date
 
+      db.collection("datesSearched").add({
+        state: args.id,
+      });
+
       return globalCasesByDate(args.id);
     },
     // id: Cases By Country Name
     getCasesByCountryName(parent, args) {
+
+      db.collection("countrySearched").add({
+        state: args.id,
+      });
+
       return casesByCountryName(args.id.trim());
     },
 
-    getCasesByState(parent, args) {
+    async getCasesByState(parent, args) {
       args.id = args.id.toUpperCase().trim() && args.id.toLowerCase().trim();
+
+      db.collection("statesSearched").add({
+        state: args.id,
+      });
 
       if (!args.id) {
         return "invalid state";
+      } else {
+        return await casesByState(args.id);
       }
-
-      return casesByState(args.id);
     },
   },
+  Mutation:{
+    addRegisteredUser(_,{email, password }){
+      const registeredUser = {email, password}
+      
+      //write code for if user already exist : email validation
+      // const emailExist =  db.collection('users').get().then((snapshot) => {
+      //   snapshot.docs.forEach(doc => {
+      //     const data = [doc.data()]
+          
+       
+      //     return data.find((user ) => user.email === 'chris@gmail.com')
+      //   })
+      // })
+
+      db.collection("users").add({
+        email,
+        password,
+      });
+
+      return registeredUser
+    },
+  }
+ 
+  
 };
+
+console.log(dates);
 module.exports = { typeDefs, resolvers };

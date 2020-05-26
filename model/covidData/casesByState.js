@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const casesByState = (state) =>
+const casesByState = state =>
   axios({
     method: "GET",
     url: "https://covid19-data.p.rapidapi.com/us",

@@ -28,8 +28,10 @@
     "firebase-admin": "8.12.1",
     "graphql": "15.0.0",
     "handlebars": "4.7.6",
+    "i": "^0.3.6",
     "jsonwebtoken": "8.5.1",
     "lodash": "4.17.15",
+    "npm": "^6.14.5",
     "stripe": "8.50.0",
     "validator": "13.0.0"
   },

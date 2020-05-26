@@ -1,0 +1,11 @@
+query {
+  getCasesByState(id: "ny") {
+    countrycode
+    country
+    state
+    latitude
+    longitude
+    confirmed
+    deaths
+  }
+}

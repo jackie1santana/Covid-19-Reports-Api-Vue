@@ -1,0 +1,6 @@
+mutation{
+  addRegisteredUser(email: "chris@gmail.com", password: "123456"){
+    email
+    password
+  }
+}

@@ -1,0 +1,9 @@
+query {
+  getGlobalCasesByDate(id: "02-15-2020") {
+    confirmed
+    recovered
+    deaths
+    active
+    date
+  }
+}
