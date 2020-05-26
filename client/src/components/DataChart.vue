@@ -143,14 +143,23 @@ export default {
   },
   methods: {
     test(){
+
+      const num = this.$apollo.queries.getTestGlobalCases.vm._data.$apolloData.data.getTestGlobalCases[0].confirmed
+
       const newSeries = Array.from(this.series)
-      newSeries[0].data.splice(2,1,1000)
+      newSeries[0].data.splice(2,1,num)
       
       // console.log(this.$apollo.queries.getTestGlobalCases.skip = true)
     
-    //  console.log(this.$apollo.skipAllQueries)
+  
+
       return newSeries
     }
+  },
+
+  mounted() {
+    // this.$apollo.queries.getTestGlobalCases.vm._data.$apolloData
+    
   },
 };
 </script>
