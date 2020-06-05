@@ -1,5 +1,8 @@
 <template>
-  <ApolloQuery :query="require('../graphql/getTestGlobalCases.gql')">
+  <ApolloQuery
+    ref="covidData"
+    :query="require('../graphql/getCurrentGlobalCases.gql')"
+  >
     <template v-slot="{ result: { loading, error, data } }">
       <div>
         <h1>Covid 19 Data</h1>
@@ -11,16 +14,18 @@
 
         <div v-if="data">
           <h1
-            v-for="cases in data.getTestGlobalCases"
+            v-for="cases in data.getCurrentGlobalCases"
             :key="cases.confirmed"
           >
-            Confirmed:{{cases.confirmed}}
+            Confirmed:{{ cases.confirmed }}
           </h1>
-
-          
         </div>
 
-        <h2>{{ test() }}</h2>
+
+<!-- call this function to output the new data into the apexchart -->
+  {{updateChart()}}
+   
+<div v-show="updateChart">
 
         <div id="chart">
           <apexchart
@@ -28,8 +33,10 @@
             height="550"
             width="1000"
             :options="chartOptions"
-            :series="test()"
+            :series="series"
           ></apexchart>
+        </div>
+        
         </div>
       </div>
     </template>
@@ -40,21 +47,23 @@
 import VueApexCharts from "vue-apexcharts";
 import gql from "graphql-tag";
 
+
+
 export default {
   components: {
     apexchart: VueApexCharts,
   },
-   apollo: {
-    getTestGlobalCases: {
+  apollo: {
+    getCurrentGlobalCases: {
       query: gql`
         query {
-          getTestGlobalCases {
-      confirmed
-      recovered
-      critical
-      deaths
-      testApi
-    }
+          getCurrentGlobalCases {
+            confirmed
+            recovered
+            critical
+            deaths
+            lastUpdate
+          }
         }
       `,
     },
@@ -65,29 +74,14 @@ export default {
     // skip () {
     //   return this.skipQuery
     // },
-   },
+  },
   data: function() {
     return {
-   
       message: "Jackie Santana",
       series: [
         {
           name: "Confirmed Cases",
-          data: [
-            2,
-            41,
-            35,
-            51,
-            55,
-            400,
-            62,
-            69,
-            91,
-            148,
-            150,
-            160,
-            170,
-          ],
+          data: [2, 41, 35, 51, 55, 400, 62, 69, 91, 148, 150, 160, 170],
         },
         {
           name: "Deaths",
@@ -141,25 +135,46 @@ export default {
       },
     };
   },
+  
   methods: {
-    test(){
-
-      const num = this.$apollo.queries.getTestGlobalCases.vm._data.$apolloData.data.getTestGlobalCases[0].confirmed
-
-      const newSeries = Array.from(this.series)
-      newSeries[0].data.splice(2,1,num)
-      
-      // console.log(this.$apollo.queries.getTestGlobalCases.skip = true)
-    
   
 
-      return newSeries
-    }
-  },
+    updateChart() {
 
-  mounted() {
-    // this.$apollo.queries.getTestGlobalCases.vm._data.$apolloData
+      //This is how you update an apexchart
+
+
+      //  const max = 90;
+      //  const min = 20;
+      // const num = this.$apollo.queries.getCurrentGlobalCases.vm._data.$apolloData.data.getCurrentGlobalCases
+
+      // console.log(this.$apollo.queries.getCurrentGlobalCases.vm._data.$apolloData.data.getCurrentGlobalCases[0])
+      // let newSeries = this.$apollo.queries.getTestGlobalCases.vm._data.$apolloData.data.getTestGlobalCases[0].confirmed[0]
+      //  const newData = this.series[0].data.map(() => {
+
+      //    return Math.floor(Math.random() * (max - min + 1)) + min
+      //  })
+      // In the same way, update the series option
+
+      let currentConfirmedCase = this.$refs.covidData.result.data.getCurrentGlobalCases[0]
+        .confirmed;
+ 
+      JSON.parse(JSON.stringify(currentConfirmedCase));
+console.log(currentConfirmedCase)
+
     
+
+      let num = [2000];
+      let data = [currentConfirmedCase, 7, 7, 9, 0, 9, 8, 7, 95, 8, 8, 6, 2];
+      data.splice(5, 1, num);
+
+//this is how you update the apexChart , you pass in the apollo query data inot the series object like
+      this.series = [
+        {
+          data,
+        },
+      ];
+    },
   },
 };
 </script>
