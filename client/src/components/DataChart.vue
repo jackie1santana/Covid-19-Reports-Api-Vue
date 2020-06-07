@@ -150,27 +150,38 @@ export default {
       //  })
       // In the same way, update the series option
 
-      let currentConfirmedCase = this.$refs.covidData.result.data.getCurrentGlobalCases[0]
+      let currentConfirmedCases = this.$refs.covidData.result.data.getCurrentGlobalCases[0]
         .confirmed;
- 
-      JSON.parse(JSON.stringify(currentConfirmedCase));
-console.log(currentConfirmedCase)
+
+        JSON.parse(JSON.stringify(currentConfirmedCases));
+      console.log(currentConfirmedCases)
+
+      let currentDeathCases = this.$refs.covidData.result.data.getCurrentGlobalCases[0]
+        .deaths;
+        
+      JSON.parse(JSON.stringify(currentDeathCases));
+      console.log(currentDeathCases)
+      
 
     
 
-      let num = [2000];
-      let data = [currentConfirmedCase, 7, 7, 9, 0, 9, 8, 7, 95, 8, 8, 6, 2];
-      data.splice(5, 1, num);
+      // let num = [2000];
+      let confirmedData = [320, 78, 7, 9, 0, currentConfirmedCases, 8, 7, 95, 800, 8, 6, 2];
+      // confirmedData.splice(5, 1, num);
+
+      // let num2 = [4000];
+      let deathData = [43, 37, 4, 49, 0, currentDeathCases, 8, 7, 400, 8, 88, 6, 200];
+      // deathData.splice(7, 1, num2);
 
 //this is how you update the apexChart , you pass in the apollo query data inot the series object like
       this.series = [
         {
           name: "Confirmed",
-          data,
+          data: confirmedData,
         },
         {
           name: "Deaths",
-          data,
+          data: deathData,
         },
       ];
     },
