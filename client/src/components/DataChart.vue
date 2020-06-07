@@ -15,10 +15,71 @@
         <div v-if="data">
           <h1
             v-for="cases in data.getCurrentGlobalCases"
-            :key="cases.confirmed"
+            :key="cases"
           >
             Confirmed:{{ cases.confirmed }}
+            Deaths:{{ cases.deaths }}
           </h1>
+
+
+<div class="card-cases">
+          <!-- CONFIRMED CARD -->
+          <v-card
+    class="mx-auto confirmed-card"
+    max-width="344"
+  >
+    <v-card-text>
+      <div>Word of the Day</div>
+      <p class="display-1 text--primary">
+        be•nev•o•lent
+      </p>
+      <p>adjective</p>
+      <div class="text--primary">
+        well meaning and kindly.<br>
+        "a benevolent smile"
+      </div>
+    </v-card-text>
+    <v-card-actions>
+      <v-btn
+        text
+        color="deep-purple accent-4"
+      >
+        Learn More
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+
+
+
+         <!-- Death CARD -->
+          <v-card
+    class="mx-auto death-card"
+    max-width="344"
+  >
+    <v-card-text>
+      <div>Word of the Day</div>
+      <p class="display-1 text--primary">
+        be•nev•o•lent
+      </p>
+      <p>adjective</p>
+      <div class="text--primary">
+        well meaning and kindly.<br>
+        "a benevolent smile"
+      </div>
+    </v-card-text>
+    <v-card-actions>
+      <v-btn
+        text
+        color="deep-purple accent-4"
+      >
+        Learn More
+      </v-btn>
+    </v-card-actions>
+  </v-card>
+  </div>
+
+
+
         </div>
 
 
@@ -199,5 +260,18 @@ export default {
   background-color: white;
   border-radius: 5px;
   box-shadow: 7px 20px 12px -5px rgba(0, 0, 0, 0.56);
+}
+
+.card-cases{
+  display: flex;
+  justify-content: center;
+}
+
+.confirmed-card{
+  margin: 20px;
+}
+
+.death-card{
+  margin: 20px;
 }
 </style>
