@@ -67,13 +67,7 @@ export default {
         }
       `,
     },
-    // variables(){
-    //   console.log(this.$apollo.queries)
-    // },
-    //  // Disable the query
-    // skip () {
-    //   return this.skipQuery
-    // },
+  
   },
   data: function() {
     return {
