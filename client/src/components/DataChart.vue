@@ -13,13 +13,7 @@
         </h4>
 
         <div v-if="data">
-          <h1
-            v-for="cases in data.getCurrentGlobalCases"
-            :key="cases"
-          >
-            Confirmed:{{ cases.confirmed }}
-            Deaths:{{ cases.deaths }}
-          </h1>
+
 
 
 <div class="card-cases">
@@ -28,17 +22,13 @@
     class="mx-auto confirmed-card"
     max-width="344"
   >
-    <v-card-text>
-      <div>Word of the Day</div>
-      <p class="display-1 text--primary">
-        be•nev•o•lent
-      </p>
-      <p>adjective</p>
-      <div class="text--primary">
-        well meaning and kindly.<br>
-        "a benevolent smile"
-      </div>
-    </v-card-text>
+    <h1
+            v-for="cases in data.getCurrentGlobalCases"
+            :key="cases"
+          >
+            Confirmed:{{ cases.confirmed }}
+           
+          </h1>
     <v-card-actions>
       <v-btn
         text
@@ -56,17 +46,13 @@
     class="mx-auto death-card"
     max-width="344"
   >
-    <v-card-text>
-      <div>Word of the Day</div>
-      <p class="display-1 text--primary">
-        be•nev•o•lent
-      </p>
-      <p>adjective</p>
-      <div class="text--primary">
-        well meaning and kindly.<br>
-        "a benevolent smile"
-      </div>
-    </v-card-text>
+   <h1
+            v-for="cases in data.getCurrentGlobalCases"
+            :key="cases"
+          >
+            Deaths:{{ cases.deaths }}
+           
+          </h1>
     <v-card-actions>
       <v-btn
         text
