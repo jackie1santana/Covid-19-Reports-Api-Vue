@@ -163,7 +163,16 @@ console.log(currentConfirmedCase)
       data.splice(5, 1, num);
 
 //this is how you update the apexChart , you pass in the apollo query data inot the series object like
-    
+      this.series = [
+        {
+          name: "Confirmed",
+          data,
+        },
+        {
+          name: "Deaths",
+          data,
+        },
+      ];
     },
   },
 };
