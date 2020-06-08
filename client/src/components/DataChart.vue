@@ -51,7 +51,7 @@
 
 
 <div class="case_passage">
- <h2  v-for="cases in data.getCurrentGlobalCases" :key="cases">Globally, <span class="font">as of</span> 4:00pm CEST, {{ isToday() }}, <span class="font">there have been</span> {{cases.confirmed.toLocaleString()}} confirmed cases <span class="font">of COVID-19, including</span> {{cases.deaths.toLocaleString()}} deaths, <span class="font">reported to WHO.</span></h2>
+ <h2  v-for="cases in data.getCurrentGlobalCases" :key="cases">Globally, <span class="font">as of</span> {{ isTime() }} CEST, {{ isToday() }}, <span class="font">there have been</span> {{cases.confirmed.toLocaleString()}} confirmed cases <span class="font">of COVID-19, including</span> {{cases.deaths.toLocaleString()}} deaths, <span class="font">reported to WHO.</span></h2>
 </div>
 
         <!-- call this function to output the new data into the apexchart -->
@@ -163,6 +163,9 @@ export default {
   methods: {
     isToday() {
       return moment().format("MMMM Do YYYY");
+    },
+    isTime() {
+      return moment().format('LTS');
     },
 
     updateChart() {
