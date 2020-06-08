@@ -302,23 +302,29 @@ export default {
 #graph {
   background-color: white;
   border-radius: 5px;
-  box-shadow: 7px 20px 12px -5px rgba(0, 0, 0, 0.56);
+ 
 }
 
 .card-cases {
   display: flex;
   justify-content: center;
   border-radius: 5px;
+  
 }
 
 .confirmed-card {
   margin: 20px;
   padding: 50px;
+   
+   -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.56);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.56);
 }
 
 .death-card {
   margin: 20px;
   padding: 50px;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.56);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.56);
 }
 
 #outside_headTitle {
@@ -345,4 +351,6 @@ export default {
 .case_passage{
     margin: 50px;
 }
+
+
 </style>
