@@ -5,88 +5,68 @@
   >
     <template v-slot="{ result: { loading, error, data } }">
       <div>
-        
-        <h1 >Covid 19 Data</h1>
-        
-        <h2>Current Cases as of {{ isToday() }}</h2>
-       
+        <div id="outside_headTitle">
+          <h1><span id="headTitle">Coronavirus Disease (COVID-19) Dashboard</span></h1>
+        </div>
 
+      
         <div v-if="data">
+          <div class="card-cases">
+            <!-- CONFIRMED CARD -->
+            <v-card class="mx-auto confirmed-card" max-width="344">
+              <h2 v-for="cases in data.getCurrentGlobalCases" :key="cases">
+                Confirmed Cases
+                <hr />
+                <br />
+                <span style="color:#00aae4">
+                  {{ cases.confirmed.toLocaleString() }}
+                </span>
+              </h2>
+              <v-card-actions>
+                <v-btn text color="deep-purple accent-4">
+                  Infections Over Time
+                </v-btn>
+              </v-card-actions>
+            </v-card>
 
+            <!-- Death CARD -->
+            <v-card class="mx-auto death-card" max-width="344">
+              <h2 v-for="cases in data.getCurrentGlobalCases" :key="cases">
+                <span v-bind:style="death_cases_title">Deaths</span>
+                <hr />
+                <br />
 
-
-<div class="card-cases">
-          <!-- CONFIRMED CARD -->
-          <v-card
-    class="mx-auto confirmed-card"
-    max-width="344"
-  >
-    <h2
-            v-for="cases in data.getCurrentGlobalCases"
-            :key="cases"
-          >
-            Confirmed Cases
-            <hr> <br>
-           <span style="color:#00aae4"> {{ cases.confirmed.toLocaleString() }} </span>
-           
-          </h2>
-    <v-card-actions>
-      <v-btn
-        text
-        color="deep-purple accent-4"
-      >
-        Infections Over Time
-      </v-btn>
-    </v-card-actions>
-  </v-card>
-
-
-
-         <!-- Death CARD -->
-          <v-card
-    class="mx-auto death-card"
-    max-width="344"
-  >
-   <h2
-            v-for="cases in data.getCurrentGlobalCases"
-            :key="cases"
-          >
-           <span v-bind:style="death_cases_title">Deaths</span> <hr> <br>
-            
-        <span style="color:#ff0000">  {{ cases.deaths.toLocaleString() }} </span>
-           
-          </h2>
-    <v-card-actions>
-      <v-btn
-        text
-        color="deep-purple accent-4"
-      >
-        Deaths Over Time
-      </v-btn>
-    </v-card-actions>
-  </v-card>
-  </div>
-
-
-
+                <span style="color:#ff0000">
+                  {{ cases.deaths.toLocaleString() }}
+                </span>
+              </h2>
+              <v-card-actions>
+                <v-btn text color="deep-purple accent-4">
+                  Deaths Over Time
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </div>
         </div>
 
 
-<!-- call this function to output the new data into the apexchart -->
-  {{updateChart()}}
-   
-<div v-show="updateChart">
+<div class="case_passage">
+ <h2  v-for="cases in data.getCurrentGlobalCases" :key="cases">Globally, <span class="font">as of</span> 4:00pm CEST, {{ isToday() }}, <span class="font">there have been</span> {{cases.confirmed.toLocaleString()}} confirmed cases <span class="font">of COVID-19, including</span> {{cases.deaths.toLocaleString()}} deaths, <span class="font">reported to WHO.</span></h2>
+</div>
 
-        <div id="chart">
-          <apexchart
-            type="area"
-            height="550"
-            width="1000"
-            :options="chartOptions"
-            :series="series"
-          ></apexchart>
-        </div>
-        
+        <!-- call this function to output the new data into the apexchart -->
+        {{ updateChart() }}
+
+        <div v-show="updateChart">
+          <div id="chart">
+            <apexchart
+              type="area"
+              height="550"
+              width="1000"
+              :options="chartOptions"
+              :series="series"
+            ></apexchart>
+          </div>
         </div>
       </div>
     </template>
@@ -96,9 +76,7 @@
 <script>
 import VueApexCharts from "vue-apexcharts";
 import gql from "graphql-tag";
-import moment from 'moment';
-
-
+import moment from "moment";
 
 export default {
   components: {
@@ -118,13 +96,12 @@ export default {
         }
       `,
     },
-  
   },
   data: function() {
     return {
-     death_cases_title: {
-       padding: '50px'
-     },
+      death_cases_title: {
+        padding: "50px",
+      },
       series: [
         {
           name: "Confirmed Cases",
@@ -182,17 +159,14 @@ export default {
       },
     };
   },
-  
-  methods: {
 
+  methods: {
     isToday() {
-        return moment().format('MMMM Do YYYY')
+      return moment().format("MMMM Do YYYY");
     },
 
     updateChart() {
-
       //This is how you update an apexchart
-
 
       //  const max = 90;
       //  const min = 20;
@@ -206,30 +180,55 @@ export default {
       //  })
       // In the same way, update the series option
 
-      let currentConfirmedCases = this.$refs.covidData.result.data.getCurrentGlobalCases[0]
-        .confirmed
+      let currentConfirmedCases = this.$refs.covidData.result.data
+        .getCurrentGlobalCases[0].confirmed;
 
-        JSON.parse(JSON.stringify(currentConfirmedCases));
-      console.log(currentConfirmedCases)
+      JSON.parse(JSON.stringify(currentConfirmedCases));
+      console.log(currentConfirmedCases);
 
-      let currentDeathCases = this.$refs.covidData.result.data.getCurrentGlobalCases[0]
-        .deaths;
-        
+      let currentDeathCases = this.$refs.covidData.result.data
+        .getCurrentGlobalCases[0].deaths;
+
       JSON.parse(JSON.stringify(currentDeathCases));
-      console.log(currentDeathCases)
-      
-
-    
+      console.log(currentDeathCases);
 
       // let num = [2000];
-      let confirmedData = [223700, 334045, 534045, 2334045, 6034045, currentConfirmedCases, 8, 7, 95, 800, 8, 6, 2];
+      let confirmedData = [
+        223700,
+        334045,
+        534045,
+        2334045,
+        6034045,
+        currentConfirmedCases,
+        8,
+        7,
+        95,
+        800,
+        8,
+        6,
+        2,
+      ];
       // confirmedData.splice(5, 1, num);
 
       // let num2 = [4000];
-      let deathData = [1000, 20000, 90000, 150000, 203345, currentDeathCases, 8, 7, 400, 8, 88, 6, 200];
+      let deathData = [
+        1000,
+        20000,
+        90000,
+        150000,
+        203345,
+        currentDeathCases,
+        8,
+        7,
+        400,
+        8,
+        88,
+        6,
+        200,
+      ];
       // deathData.splice(7, 1, num2);
 
-//this is how you update the apexChart , you pass in the apollo query data inot the series object like
+      //this is how you update the apexChart , you pass in the apollo query data inot the series object like
       this.series = [
         {
           name: "Confirmed",
@@ -257,21 +256,44 @@ export default {
   box-shadow: 7px 20px 12px -5px rgba(0, 0, 0, 0.56);
 }
 
-.card-cases{
+.card-cases {
   display: flex;
   justify-content: center;
   border-radius: 5px;
 }
 
-.confirmed-card{
+.confirmed-card {
   margin: 20px;
   padding: 50px;
 }
 
-.death-card{
+.death-card {
   margin: 20px;
   padding: 50px;
 }
 
+#outside_headTitle {
+  margin: 40px;
 
+  #headTitle {
+    border: 1px solid rgb(206, 198, 198);
+    border-radius: 4px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background: rgb(206, 198, 198);
+    color: white;
+     box-shadow: 7px 10px 12px -5px rgba(0,0,0,0.56);
+  }
+
+
+}
+
+  .font{
+  font-size: 20px;
+  font-weight:lighter;
+}
+
+.case_passage{
+    margin: 50px;
+}
 </style>
