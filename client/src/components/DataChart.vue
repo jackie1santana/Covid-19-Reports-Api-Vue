@@ -6,7 +6,7 @@
     <template v-slot="{ result: { loading, error, data } }">
       <div>
         <h1>Covid 19 Data</h1>
-        <h3>Current Cases as of 5/20/20</h3>
+        <h3>Current Cases as of new Date()</h3>
         <h4>
           [current cases here..coming soon [Active, Critical, Recovered,
           Deaths]]
@@ -22,19 +22,21 @@
     class="mx-auto confirmed-card"
     max-width="344"
   >
-    <h1
+    <h2
             v-for="cases in data.getCurrentGlobalCases"
             :key="cases"
           >
-            Confirmed:{{ cases.confirmed }}
+            Confirmed Cases
+            <hr> <br>
+           <span style="color:#00aae4"> {{ cases.confirmed.toLocaleString() }} </span>
            
-          </h1>
+          </h2>
     <v-card-actions>
       <v-btn
         text
         color="deep-purple accent-4"
       >
-        Learn More
+        Infections Over Time
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -46,19 +48,21 @@
     class="mx-auto death-card"
     max-width="344"
   >
-   <h1
+   <h2
             v-for="cases in data.getCurrentGlobalCases"
             :key="cases"
           >
-            Deaths:{{ cases.deaths }}
+           <span v-bind:style="death_cases_title">Deaths</span> <hr> <br>
+            
+        <span style="color:#ff0000">  {{ cases.deaths.toLocaleString() }} </span>
            
-          </h1>
+          </h2>
     <v-card-actions>
       <v-btn
         text
         color="deep-purple accent-4"
       >
-        Learn More
+        Deaths Over Time
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -118,7 +122,9 @@ export default {
   },
   data: function() {
     return {
-      message: "Jackie Santana",
+     death_cases_title: {
+       padding: '50px'
+     },
       series: [
         {
           name: "Confirmed Cases",
@@ -198,7 +204,7 @@ export default {
       // In the same way, update the series option
 
       let currentConfirmedCases = this.$refs.covidData.result.data.getCurrentGlobalCases[0]
-        .confirmed;
+        .confirmed
 
         JSON.parse(JSON.stringify(currentConfirmedCases));
       console.log(currentConfirmedCases)
@@ -251,13 +257,18 @@ export default {
 .card-cases{
   display: flex;
   justify-content: center;
+  border-radius: 5px;
 }
 
 .confirmed-card{
   margin: 20px;
+  padding: 50px;
 }
 
 .death-card{
   margin: 20px;
+  padding: 50px;
 }
+
+
 </style>
