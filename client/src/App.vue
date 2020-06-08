@@ -5,11 +5,11 @@
          <Registration slot="signup"></Registration>
          <Login slot="login"></Login>
       </Header>
-      
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>
     <router-view/>
+    <Footer></Footer>
   </div>
 </template>
 
@@ -17,11 +17,13 @@
 import Header from './components/Header'
 import Registration from './components/Registration'
 import Login from './components/Login'
+import Footer from './components/Footer'
 export default {
   components:{
     Header,
     Registration,
-    Login
+    Login,
+    Footer
   }
 }
 </script>
