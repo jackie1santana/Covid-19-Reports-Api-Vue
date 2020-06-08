@@ -74,7 +74,7 @@
 
 
     <div>
-  <v-footer style="margin-top:80px;"
+  <v-footer style="margin-top:80px;padding:20px;"
     color="primary lighten-1"
     padless
     
@@ -99,11 +99,11 @@
         {{ link }}
       </v-btn>
        </v-col>
-       <v-col
+       <v-col style="padding:10px;"
         class="primary lighten-2 py-4 text-center white--text"
         cols="12"
       >
-        {{ new Date().getFullYear() }} — <strong>Powered by Santana Inc.</strong>
+        {{ new Date().getFullYear() }} — <strong>Powered by Santana Inc.</strong> &reg;
       </v-col>
     </v-row>
   </v-footer>
@@ -244,18 +244,18 @@ export default {
       // let num = [2000];
       let confirmedData = [
         223700,
-        334045,
-        534045,
-        2334045,
+        3340235,
+        5345045,
+        3334045,
         6034045,
         currentConfirmedCases,
-        8,
-        7,
-        95,
-        800,
-        8,
-        6,
-        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
       ];
       // confirmedData.splice(5, 1, num);
 
@@ -267,13 +267,13 @@ export default {
         150000,
         203345,
         currentDeathCases,
-        8,
-        7,
-        400,
-        8,
-        88,
-        6,
-        200,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
       ];
       // deathData.splice(7, 1, num2);
 
@@ -297,11 +297,13 @@ export default {
 #chart {
   display: flex;
   justify-content: center;
+  
 }
 
 #graph {
   background-color: white;
   border-radius: 5px;
+  
  
 }
 
