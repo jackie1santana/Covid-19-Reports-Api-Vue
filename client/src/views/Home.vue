@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <DataChart></DataChart>
+    
   </div>
 </template>
 

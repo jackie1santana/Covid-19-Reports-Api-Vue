@@ -10,7 +10,7 @@
         </div>
 
       
-        <div v-if="data">
+        <div  v-if="data">
           <div class="card-cases">
             <!-- CONFIRMED CARD -->
             <v-card class="mx-auto confirmed-card" max-width="344">
@@ -70,6 +70,44 @@
         </div>
       </div>
     </template>
+
+
+
+    <div>
+  <v-footer style="margin-top:80px;"
+    color="primary lighten-1"
+    padless
+    
+  >
+    <v-row
+      justify="center"
+      no-gutters
+      
+    >
+    <v-col
+        class="primary lighten-2 py-4 text-center white--text"
+        cols="12"
+      >
+      <v-btn 
+        v-for="link in links"
+        :key="link"
+        color="white"
+        text
+        rounded
+        class="my-2"
+      >
+        {{ link }}
+      </v-btn>
+       </v-col>
+       <v-col
+        class="primary lighten-2 py-4 text-center white--text"
+        cols="12"
+      >
+        {{ new Date().getFullYear() }} — <strong>Powered by Santana Inc.</strong>
+      </v-col>
+    </v-row>
+  </v-footer>
+  </div>
   </ApolloQuery>
 </template>
 
@@ -99,6 +137,14 @@ export default {
   },
   data: function() {
     return {
+       links: [
+        'Home',
+        'About Us',
+        'Team',
+        'Services',
+        'Blog',
+        'Contact Us',
+      ],
       death_cases_title: {
         padding: "50px",
       },
