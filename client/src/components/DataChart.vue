@@ -5,12 +5,10 @@
   >
     <template v-slot="{ result: { loading, error, data } }">
       <div>
-        <h1>Covid 19 Data</h1>
-        <h3>Current Cases as of new Date()</h3>
-        <h4>
-          [current cases here..coming soon [Active, Critical, Recovered,
-          Deaths]]
-        </h4>
+        <h1 style="text-decoration:underline">Covid 19 Data</h1>
+        
+        <h2>Current Cases as of {{ isToday() }}</h2>
+       
 
         <div v-if="data">
 
@@ -97,6 +95,7 @@
 <script>
 import VueApexCharts from "vue-apexcharts";
 import gql from "graphql-tag";
+import moment from 'moment';
 
 
 
@@ -184,7 +183,10 @@ export default {
   },
   
   methods: {
-  
+
+    isToday() {
+        return moment().format('MMMM Do YYYY')
+    },
 
     updateChart() {
 
