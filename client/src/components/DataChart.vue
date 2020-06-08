@@ -248,7 +248,6 @@ export default {
 #chart {
   display: flex;
   justify-content: center;
-  margin:80px;
 }
 
 #graph {
@@ -261,7 +260,6 @@ export default {
   display: flex;
   justify-content: center;
   border-radius: 5px;
-  margin:80px;
 }
 
 .confirmed-card{
