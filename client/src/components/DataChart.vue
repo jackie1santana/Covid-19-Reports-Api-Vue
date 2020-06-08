@@ -5,7 +5,8 @@
   >
     <template v-slot="{ result: { loading, error, data } }">
       <div>
-        <h1 style="text-decoration:underline">Covid 19 Data</h1>
+        
+        <h1 >Covid 19 Data</h1>
         
         <h2>Current Cases as of {{ isToday() }}</h2>
        
