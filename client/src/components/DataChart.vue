@@ -60,9 +60,9 @@
         <div v-show="updateChart">
           <div id="chart">
             <apexchart
+            height="550"
+            width="1000"
               type="area"
-              height="550"
-              width="1000"
               :options="chartOptions"
               :series="series"
             ></apexchart>
@@ -117,6 +117,7 @@ import gql from "graphql-tag";
 import moment from "moment";
 
 export default {
+  
   components: {
     apexchart: VueApexCharts,
   },
@@ -137,6 +138,7 @@ export default {
   },
   data: function() {
     return {
+      num: true,
        links: [
         'Home',
         'About Us',
@@ -161,7 +163,7 @@ export default {
       chartOptions: {
         chart: {
           height: 350,
-          type: "line",
+          type: "area",
           zoom: {
             enabled: false,
           },
@@ -203,10 +205,13 @@ export default {
         },
         colors: ["#00aae4", "#ff0000"],
       },
+      
     };
   },
 
   methods: {
+  
+
     isToday() {
       return moment().format("MMMM Do YYYY");
     },
@@ -290,6 +295,9 @@ export default {
       ];
     },
   },
+  created(){
+    this.updateChart()
+  }
 };
 </script>
 
@@ -354,5 +362,57 @@ export default {
     margin: 50px;
 }
 
+/* Cases Card */
+@media all and (max-width: 672px){
+  .card-cases {
+    display: inline-block;
+    justify-content: center;
+    border-radius: 5px;
+    
+  }
+}
+
+
+@media all and (max-width: 834px){
+  #outside_headTitle {
+  margin: 40px;
+
+  #headTitle {
+    display: block;
+    margin-right: 0.4em;
+    border: 1px solid rgb(206, 198, 198);
+    border-radius: 4px;
+    padding-left: 40px;
+    padding-right: 40px;
+    background: rgb(206, 198, 198);
+    color: white;
+     box-shadow: 7px 10px 12px -5px rgba(0,0,0,0.56);
+  }
+  }
+  }
+
+  @media all and (max-width: 1013px){
+   #chart{
+     zoom: 80%;
+   }
+  }
+
+ @media all and (max-width: 700px){
+   #chart{
+     zoom: 70%;
+   }
+  }
+
+ @media all and (max-width: 700px){
+   #chart{
+     zoom: 60%;
+   }
+  }
+
+  @media all and (max-width: 500px){
+   #chart{
+     zoom: 47%;
+   }
+  }
 
 </style>
