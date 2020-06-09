@@ -1,5 +1,6 @@
 # Technologies Used
 * Vue.js Framework
+* Vue Apollo
 * Apex Chart.js
 * Vuetify 
 * Node.js
@@ -11,8 +12,9 @@
 
 # Development Notes
     For this project I am using Vue.js because it is a light-weight framework, I chose Vue particularly
-    for it's convenient directives. The main purpose of this app is to give visual data of the current 
-    coronavirus disease statistics globally in real time. The covid 19 data is  queried via Apollo Server 
+    for it's convenient directives. The main purpose of this app is to give visual data of the current. 
+    Through Vue Apollo I implement coronavirus disease statistics globally in real time. The covid 19 data 
+    is  queried via Apollo Server 
     Express & GraphQL; the data is then sent back to firebase 
     cloud firestore database & deployed on a Heroku Server.
 
@@ -30,3 +32,9 @@ if they have already been registered then we will run a res.status(400)
 * create a hash (combines users password 7 salt to create a hashed password)
 
 1. If everything passes & an email is not already registered then create a user.
+
+1. Add the rest of the graphQL Queries:
+* Cases By Date
+* Cases By Country Name
+* Cases by State
+* Login Credentials
