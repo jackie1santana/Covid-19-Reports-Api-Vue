@@ -14,14 +14,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 
-//Will this break the program?
 
-if (process.env.NODE_ENV === "production") {
-  // We are running in production mode
-} else {
-  // We are running in development mode
   var PORT = process.env.PORT;
-}
+
 
 
 const server = new ApolloServer({ typeDefs, resolvers });

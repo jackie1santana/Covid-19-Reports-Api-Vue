@@ -1,5 +1,5 @@
 const { gql } = require("apollo-server");
-const { currentGlobalCases, testGlobalCases } = require("../covidData/currentGlobalCases");
+const { currentGlobalCases } = require("../covidData/currentGlobalCases");
 
 const { casesByCountryName } = require("../covidData/casesByCountryName");
 
@@ -59,18 +59,10 @@ const typeDefs = gql`
 
   }
 
-  type TestGlobalCases {
-    confirmed: Int
-    recovered: Int
-    critical: Int
-    deaths: Int
-    lastUpdate: String
-    testApi: Boolean
-  }
+
 
   type Query {
     getCurrentGlobalCases: [GlobalCases]
-    getTestGlobalCases: [TestGlobalCases]
     getGlobalCasesByDate(id: String!): [GlobalCasesByDate]
     getCasesByCountryName(id: String!): CasesByCountryName
     getCasesByState(id: String!): CasesByState
@@ -88,23 +80,22 @@ const dates = [];
 const resolvers = {
   Query: {
     getCurrentGlobalCases: () => currentGlobalCases(),
-    getTestGlobalCases: () => testGlobalCases,
 
     getGlobalCasesByDate(parent, args) {
-      //id: Cases By Date
+      // id: Cases By Date
 
-      // db.collection("datesSearched").add({
-      //   state: args.id,
-      // });
+      db.collection("datesSearched").add({
+        state: args.id,
+      });
 
       return globalCasesByDate(args.id);
     },
     // id: Cases By Country Name
     getCasesByCountryName(parent, args) {
 
-      // db.collection("countrySearched").add({
-      //   state: args.id,
-      // });
+      db.collection("countrySearched").add({
+        state: args.id,
+      });
 
       return casesByCountryName(args.id.trim());
     },
@@ -112,9 +103,9 @@ const resolvers = {
     async getCasesByState(parent, args) {
       args.id = args.id.toUpperCase().trim() && args.id.toLowerCase().trim();
 
-      // db.collection("statesSearched").add({
-      //   state: args.id,
-      // });
+      db.collection("statesSearched").add({
+        state: args.id,
+      });
 
       if (!args.id) {
         return "invalid state";
