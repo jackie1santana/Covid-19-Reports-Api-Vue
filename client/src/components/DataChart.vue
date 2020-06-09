@@ -1,16 +1,21 @@
 <template>
+<div>
   <ApolloQuery
     ref="covidData"
     :query="require('../graphql/getCurrentGlobalCases.gql')"
   >
     <template v-slot="{ result: { loading, error, data } }">
+
+
+
       <div>
         <div id="outside_headTitle">
           <h1><span id="headTitle">Coronavirus Disease (COVID-19) Dashboard</span></h1>
         </div>
 
+  
       
-        <div  v-if="data">
+        <div>
           <div class="card-cases">
             <!-- CONFIRMED CARD -->
             <v-card class="mx-auto confirmed-card" max-width="344">
@@ -109,11 +114,12 @@
   </v-footer>
   </div>
   </ApolloQuery>
+  </div>
 </template>
 
 <script>
 import VueApexCharts from "vue-apexcharts";
-import gql from "graphql-tag";
+
 import moment from "moment";
 
 export default {
@@ -121,24 +127,11 @@ export default {
   components: {
     apexchart: VueApexCharts,
   },
-  apollo: {
-    getCurrentGlobalCases: {
-      query: gql`
-        query {
-          getCurrentGlobalCases {
-            confirmed
-            recovered
-            critical
-            deaths
-            lastUpdate
-          }
-        }
-      `,
-    },
-  },
+  
+  
   data: function() {
     return {
-      num: true,
+      isLoading: true,
        links: [
         'Home',
         'About Us',
@@ -218,6 +211,7 @@ export default {
     isTime() {
       return moment().format('LTS');
     },
+    
 
     updateChart() {
       //This is how you update an apexchart
@@ -237,13 +231,17 @@ export default {
       let currentConfirmedCases = this.$refs.covidData.result.data
         .getCurrentGlobalCases[0].confirmed;
 
-      JSON.parse(JSON.stringify(currentConfirmedCases));
+      // JSON.parse(JSON.stringify(currentConfirmedCases));
       console.log(currentConfirmedCases);
 
       let currentDeathCases = this.$refs.covidData.result.data
         .getCurrentGlobalCases[0].deaths;
 
-      JSON.parse(JSON.stringify(currentDeathCases));
+
+
+
+
+      // JSON.parse(JSON.stringify(currentDeathCases));
       console.log(currentDeathCases);
 
       // let num = [2000];
@@ -295,8 +293,10 @@ export default {
       ];
     },
   },
+
   mounted(){
-    this.updateChart()
+    
+    
   }
 };
 </script>
