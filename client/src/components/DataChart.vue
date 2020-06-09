@@ -73,7 +73,7 @@
 
 
 
-    <div>
+    <div class="footer">
   <v-footer style="margin-top:80px;padding:20px;"
     color="primary lighten-1"
     padless
@@ -295,7 +295,7 @@ export default {
       ];
     },
   },
-  created(){
+  mounted(){
     this.updateChart()
   }
 };
@@ -415,4 +415,20 @@ export default {
    }
   }
 
+  @media all and (max-width: 360px){
+   #chart{
+     zoom: 35%;
+   }
+
+   
+  }
+
+html,body
+{
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; 
+}
 </style>
