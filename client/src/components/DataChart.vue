@@ -251,9 +251,9 @@ export default {
         5345045,
         3334045,
         6034045,
+        6504000,
         7204000,
         currentConfirmedCases,
-        0,
         0,
         0,
         0,
@@ -269,14 +269,14 @@ export default {
         75000,
         85000,
         100345,
-        120000
+        120000,
+        122320,
         currentDeathCases,
         0,
         0,
         0,
         0,
-        0,
-        0,
+        0
       ];
       // deathData.splice(7, 1, num2);
 
