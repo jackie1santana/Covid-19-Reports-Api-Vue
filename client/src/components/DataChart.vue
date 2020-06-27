@@ -251,8 +251,8 @@ export default {
         5345045,
         3334045,
         6034045,
+        7204000,
         currentConfirmedCases,
-        0,
         0,
         0,
         0,
@@ -264,13 +264,13 @@ export default {
 
       // let num2 = [4000];
       let deathData = [
-        1000,
-        20000,
-        90000,
-        150000,
-        203345,
+        10300,
+        50200,
+        75000,
+        85000,
+        100345,
+        120000
         currentDeathCases,
-        0,
         0,
         0,
         0,
