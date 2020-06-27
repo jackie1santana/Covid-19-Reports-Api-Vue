@@ -252,13 +252,12 @@ export default {
         3334045,
         6034045,
         6504000,
-        7204000,
         currentConfirmedCases,
         0,
         0,
         0,
         0,
-        0,
+        0
       ];
       // confirmedData.splice(5, 1, num);
 
@@ -270,7 +269,6 @@ export default {
         85000,
         100345,
         120000,
-        122320,
         currentDeathCases,
         0,
         0,
