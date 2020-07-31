@@ -252,7 +252,7 @@ export default {
         3334045,
         6034045,
         10504000,
-        17454714,
+        17454714, 
         currentConfirmedCases,
         0,
         0,
