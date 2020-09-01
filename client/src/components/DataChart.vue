@@ -253,8 +253,8 @@ export default {
         6034045,
         10504000,
         17454714, 
+        20182348,
         currentConfirmedCases,
-        0,
         0,
         0,
         0
@@ -270,8 +270,8 @@ export default {
         100345,
         320000,
         675434,
+        703456,
         currentDeathCases,
-        0,
         0,
         0,
         0
