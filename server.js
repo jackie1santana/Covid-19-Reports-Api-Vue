@@ -26,5 +26,5 @@ app.use(express.static(publicDirectoryPath))
 
 
 app.listen(PORT, () =>
-  console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`)
+  console.log(`🚀 Server ready at http://localhost:${PORT} | GraphQL Server: http://localhost:${PORT}${server.graphqlPath}`)
 );
