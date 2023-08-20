@@ -37,4 +37,8 @@ if they have already been registered then we will run a res.status(400)
 * Cases By Date
 * Cases By Country Name
 * Cases by State
+
+to run vue:
+nvm install 14.15.0
+nvm use 14.15.0
 * Login Credentials

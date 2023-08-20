@@ -12,7 +12,7 @@ server.applyMiddleware({ app });
 
 
 dotenv.config({ path: "./config/.env" });
-var PORT = process.env.PORT;
+var PORT = process.env.PORT || 3000;
 
 
 
